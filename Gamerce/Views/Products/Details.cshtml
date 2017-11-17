@@ -1,0 +1,48 @@
+﻿@model Gamerce.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductGenre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductGenre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductSystem)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductSystem)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductCondition)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductCondition)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ProductID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
