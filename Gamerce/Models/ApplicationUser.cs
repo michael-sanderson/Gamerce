@@ -13,9 +13,6 @@ namespace Gamerce.Models
     {
         public int UserID { get; set; }
         [Required]
-        [DisplayName("User Name")]
-        public string UserName { get; set; }
-        [Required]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
         [Required]
@@ -24,9 +21,7 @@ namespace Gamerce.Models
         [Required]
         [DisplayName("Post Code")]
         public string PostCode { get; set; }
-        [Required]
-        [DisplayName("Mobile phone no.")]
-        public string MobileNumber { get; set; }
+
         public byte[] Photo { get; set; }
     }
 }

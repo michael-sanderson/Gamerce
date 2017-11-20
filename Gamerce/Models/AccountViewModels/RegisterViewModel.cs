@@ -10,14 +10,6 @@ namespace Gamerce.Models.AccountViewModels
     {
 
         [Required]
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
-
-        [Required]
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
-
-        [Required]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
@@ -26,6 +18,14 @@ namespace Gamerce.Models.AccountViewModels
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
         [Required]  
         [Display(Name = "Post Code")]
         public string PostCode { get; set; }
@@ -33,7 +33,7 @@ namespace Gamerce.Models.AccountViewModels
         [Required]
         [Phone]
         [Display(Name = "Mobile phone no.")]
-        public string MobileNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Display(Name = "Upload an optional profile photo")]
         public byte[] ProfilePhoto { get; set; }
