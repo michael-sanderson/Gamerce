@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Gamerce.Models
 {
-    public class Status
+    public class Genre
     {
-        public int StatusID { get; set; }
+        public int GenreID { get; set; }
         [Required]
-        [DisplayName("Status")]
-        public string RequestStatus { get; set; }
-        public ICollection<ChangeRequest> ChangeRequests { get; set; }
+        [DisplayName("Genre")]
+        public string ProductGenre { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

@@ -10,22 +10,22 @@ using Gamerce.Models;
 
 namespace Gamerce.Controllers
 {
-    public class StatusController : Controller
+    public class ConditionsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public StatusController(ApplicationDbContext context)
+        public ConditionsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Status
+        // GET: Conditions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Statuses.ToListAsync());
+            return View(await _context.Conditions.ToListAsync());
         }
 
-        // GET: Status/Details/5
+        // GET: Conditions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace Gamerce.Controllers
                 return NotFound();
             }
 
-            var status = await _context.Statuses
-                .SingleOrDefaultAsync(m => m.StatusID == id);
-            if (status == null)
+            var condition = await _context.Conditions
+                .SingleOrDefaultAsync(m => m.ConditionID == id);
+            if (condition == null)
             {
                 return NotFound();
             }
 
-            return View(status);
+            return View(condition);
         }
 
-        // GET: Status/Create
+        // GET: Conditions/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Status/Create
+        // POST: Conditions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StatusID,RequestStatus")] Status status)
+        public async Task<IActionResult> Create([Bind("ConditionID,ProductCondition")] Condition condition)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(status);
+                _context.Add(condition);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(status);
+            return View(condition);
         }
 
-        // GET: Status/Edit/5
+        // GET: Conditions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace Gamerce.Controllers
                 return NotFound();
             }
 
-            var status = await _context.Statuses.SingleOrDefaultAsync(m => m.StatusID == id);
-            if (status == null)
+            var condition = await _context.Conditions.SingleOrDefaultAsync(m => m.ConditionID == id);
+            if (condition == null)
             {
                 return NotFound();
             }
-            return View(status);
+            return View(condition);
         }
 
-        // POST: Status/Edit/5
+        // POST: Conditions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StatusID,RequestStatus")] Status status)
+        public async Task<IActionResult> Edit(int id, [Bind("ConditionID,ProductCondition")] Condition condition)
         {
-            if (id != status.StatusID)
+            if (id != condition.ConditionID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Gamerce.Controllers
             {
                 try
                 {
-                    _context.Update(status);
+                    _context.Update(condition);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StatusExists(status.StatusID))
+                    if (!ConditionExists(condition.ConditionID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace Gamerce.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(status);
+            return View(condition);
         }
 
-        // GET: Status/Delete/5
+        // GET: Conditions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace Gamerce.Controllers
                 return NotFound();
             }
 
-            var status = await _context.Statuses
-                .SingleOrDefaultAsync(m => m.StatusID == id);
-            if (status == null)
+            var condition = await _context.Conditions
+                .SingleOrDefaultAsync(m => m.ConditionID == id);
+            if (condition == null)
             {
                 return NotFound();
             }
 
-            return View(status);
+            return View(condition);
         }
 
-        // POST: Status/Delete/5
+        // POST: Conditions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var status = await _context.Statuses.SingleOrDefaultAsync(m => m.StatusID == id);
-            _context.Statuses.Remove(status);
+            var condition = await _context.Conditions.SingleOrDefaultAsync(m => m.ConditionID == id);
+            _context.Conditions.Remove(condition);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StatusExists(int id)
+        private bool ConditionExists(int id)
         {
-            return _context.Statuses.Any(e => e.StatusID == id);
+            return _context.Conditions.Any(e => e.ConditionID == id);
         }
     }
 }

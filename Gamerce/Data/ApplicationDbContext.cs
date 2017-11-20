@@ -15,9 +15,10 @@ namespace Gamerce.Data
         {
         }
 
-        public DbSet<ChangeRequest> ChangeRequests { get; set; }
-        public DbSet<Priority> Priorities { get; set; }
-        public DbSet<Status> Statuses { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Condition> Conditions { get; set; }
+        public DbSet<SaleStatus> SaleStatuses { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

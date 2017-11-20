@@ -10,22 +10,22 @@ using Gamerce.Models;
 
 namespace Gamerce.Controllers
 {
-    public class PrioritiesController : Controller
+    public class SaleStatusController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public PrioritiesController(ApplicationDbContext context)
+        public SaleStatusController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Priorities
+        // GET: SaleStatus
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Priorities.ToListAsync());
+            return View(await _context.SaleStatuses.ToListAsync());
         }
 
-        // GET: Priorities/Details/5
+        // GET: SaleStatus/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace Gamerce.Controllers
                 return NotFound();
             }
 
-            var priority = await _context.Priorities
-                .SingleOrDefaultAsync(m => m.PriorityID == id);
-            if (priority == null)
+            var saleStatus = await _context.SaleStatuses
+                .SingleOrDefaultAsync(m => m.SaleStatusID == id);
+            if (saleStatus == null)
             {
                 return NotFound();
             }
 
-            return View(priority);
+            return View(saleStatus);
         }
 
-        // GET: Priorities/Create
+        // GET: SaleStatus/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Priorities/Create
+        // POST: SaleStatus/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PriorityID,PriorityLevel")] Priority priority)
+        public async Task<IActionResult> Create([Bind("SaleStatusID,ProductSaleStatus")] SaleStatus saleStatus)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(priority);
+                _context.Add(saleStatus);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(priority);
+            return View(saleStatus);
         }
 
-        // GET: Priorities/Edit/5
+        // GET: SaleStatus/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace Gamerce.Controllers
                 return NotFound();
             }
 
-            var priority = await _context.Priorities.SingleOrDefaultAsync(m => m.PriorityID == id);
-            if (priority == null)
+            var saleStatus = await _context.SaleStatuses.SingleOrDefaultAsync(m => m.SaleStatusID == id);
+            if (saleStatus == null)
             {
                 return NotFound();
             }
-            return View(priority);
+            return View(saleStatus);
         }
 
-        // POST: Priorities/Edit/5
+        // POST: SaleStatus/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PriorityID,PriorityLevel")] Priority priority)
+        public async Task<IActionResult> Edit(int id, [Bind("SaleStatusID,ProductSaleStatus")] SaleStatus saleStatus)
         {
-            if (id != priority.PriorityID)
+            if (id != saleStatus.SaleStatusID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Gamerce.Controllers
             {
                 try
                 {
-                    _context.Update(priority);
+                    _context.Update(saleStatus);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PriorityExists(priority.PriorityID))
+                    if (!SaleStatusExists(saleStatus.SaleStatusID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace Gamerce.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(priority);
+            return View(saleStatus);
         }
 
-        // GET: Priorities/Delete/5
+        // GET: SaleStatus/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace Gamerce.Controllers
                 return NotFound();
             }
 
-            var priority = await _context.Priorities
-                .SingleOrDefaultAsync(m => m.PriorityID == id);
-            if (priority == null)
+            var saleStatus = await _context.SaleStatuses
+                .SingleOrDefaultAsync(m => m.SaleStatusID == id);
+            if (saleStatus == null)
             {
                 return NotFound();
             }
 
-            return View(priority);
+            return View(saleStatus);
         }
 
-        // POST: Priorities/Delete/5
+        // POST: SaleStatus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var priority = await _context.Priorities.SingleOrDefaultAsync(m => m.PriorityID == id);
-            _context.Priorities.Remove(priority);
+            var saleStatus = await _context.SaleStatuses.SingleOrDefaultAsync(m => m.SaleStatusID == id);
+            _context.SaleStatuses.Remove(saleStatus);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PriorityExists(int id)
+        private bool SaleStatusExists(int id)
         {
-            return _context.Priorities.Any(e => e.PriorityID == id);
+            return _context.SaleStatuses.Any(e => e.SaleStatusID == id);
         }
     }
 }
