@@ -13,9 +13,6 @@ namespace Gamerce.Models
         [Required]
         public string Title { get; set; }
         [Required]
-        [DisplayName("Video game system")]
-        public string System { get; set; }
-        [Required]
         [DataType(DataType.MultilineText)]
         [DisplayName("Description")]
         public string ProductDescription { get; set; }
@@ -28,8 +25,11 @@ namespace Gamerce.Models
         public int SaleStatusID { get; set; }
         [Required]
         public int ConditionID { get; set; }
+        [Required]
+        public int GameSystemID { get; set; }
         public Genre Genre { get; set; }
         public SaleStatus SaleStatus { get; set; }
-        public Condition Condition { get; set; }        
+        public Condition Condition { get; set; }
+        public GameSystem GameSystem { get; set; }
     }
 }

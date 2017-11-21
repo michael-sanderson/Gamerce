@@ -19,6 +19,7 @@ namespace Gamerce.Data
         public DbSet<Condition> Conditions { get; set; }
         public DbSet<SaleStatus> SaleStatuses { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<GameSystem> GameSystems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
