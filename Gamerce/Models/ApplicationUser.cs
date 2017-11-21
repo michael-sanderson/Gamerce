@@ -21,7 +21,7 @@ namespace Gamerce.Models
         [Required]
         [DisplayName("Post Code")]
         public string PostCode { get; set; }
-
+        [DisplayName("Upload an optional profile photo")]
         public byte[] Photo { get; set; }
     }
 }

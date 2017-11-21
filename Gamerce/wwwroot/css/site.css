@@ -10,6 +10,12 @@
     padding-right: 15px;
 }
 
+.logo {
+    height: 50px;
+    width: 50px;
+    padding-right: 7px;
+}
+
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
@@ -32,4 +38,8 @@
     .carousel-caption {
         display: none;
     }
+
+
 }
+
+

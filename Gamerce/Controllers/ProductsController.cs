@@ -22,7 +22,7 @@ namespace Gamerce.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus);
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus).Include(p => p.GameSystem);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -38,6 +38,7 @@ namespace Gamerce.Controllers
                 .Include(p => p.Condition)
                 .Include(p => p.Genre)
                 .Include(p => p.SaleStatus)
+                .Include(p => p.GameSystem)
                 .SingleOrDefaultAsync(m => m.ProductID == id);
             if (product == null)
             {
@@ -53,6 +54,7 @@ namespace Gamerce.Controllers
             ViewData["ConditionID"] = new SelectList(_context.Conditions, "ConditionID", "ProductCondition");
             ViewData["GenreID"] = new SelectList(_context.Set<Genre>(), "GenreID", "ProductGenre");
             ViewData["SaleStatusID"] = new SelectList(_context.SaleStatuses, "SaleStatusID", "ProductSaleStatus");
+            ViewData["GameSystemID"] = new SelectList(_context.GameSystems, "GameSystemID", "ProductSystem");
             return View();
         }
 
@@ -61,7 +63,7 @@ namespace Gamerce.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,Title,System,ProductDescription,Price,GenreID,SaleStatusID,ConditionID")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductID,Title,ProductDescription,Price,GenreID,SaleStatusID,ConditionID,GameSystemID")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -72,6 +74,8 @@ namespace Gamerce.Controllers
             ViewData["ConditionID"] = new SelectList(_context.Conditions, "ConditionID", "ProductCondition", product.ConditionID);
             ViewData["GenreID"] = new SelectList(_context.Set<Genre>(), "GenreID", "ProductGenre", product.GenreID);
             ViewData["SaleStatusID"] = new SelectList(_context.SaleStatuses, "SaleStatusID", "ProductSaleStatus", product.SaleStatusID);
+            ViewData["GameSystemID"] = new SelectList(_context.GameSystems, "GameSystemID", "ProductSystem", product.GameSystemID);
+
             return View(product);
         }
 
@@ -91,6 +95,8 @@ namespace Gamerce.Controllers
             ViewData["ConditionID"] = new SelectList(_context.Conditions, "ConditionID", "ProductCondition", product.ConditionID);
             ViewData["GenreID"] = new SelectList(_context.Set<Genre>(), "GenreID", "ProductGenre", product.GenreID);
             ViewData["SaleStatusID"] = new SelectList(_context.SaleStatuses, "SaleStatusID", "ProductSaleStatus", product.SaleStatusID);
+            ViewData["GameSystemID"] = new SelectList(_context.GameSystems, "GameSystemID", "ProductSystem", product.GameSystemID);
+
             return View(product);
         }
 
@@ -99,7 +105,7 @@ namespace Gamerce.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Title,System,ProductDescription,Price,GenreID,SaleStatusID,ConditionID")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Title,ProductDescription,Price,GenreID,SaleStatusID,ConditionID,GameSystemID")] Product product)
         {
             if (id != product.ProductID)
             {
@@ -129,6 +135,7 @@ namespace Gamerce.Controllers
             ViewData["ConditionID"] = new SelectList(_context.Conditions, "ConditionID", "ProductCondition", product.ConditionID);
             ViewData["GenreID"] = new SelectList(_context.Set<Genre>(), "GenreID", "ProductGenre", product.GenreID);
             ViewData["SaleStatusID"] = new SelectList(_context.SaleStatuses, "SaleStatusID", "ProductSaleStatus", product.SaleStatusID);
+            ViewData["GameSystemID"] = new SelectList(_context.GameSystems, "GameSystemID", "ProductSystem", product.GameSystemID);
             return View(product);
         }
 
@@ -144,6 +151,7 @@ namespace Gamerce.Controllers
                 .Include(p => p.Condition)
                 .Include(p => p.Genre)
                 .Include(p => p.SaleStatus)
+                .Include(p => p.GameSystem)
                 .SingleOrDefaultAsync(m => m.ProductID == id);
             if (product == null)
             {
