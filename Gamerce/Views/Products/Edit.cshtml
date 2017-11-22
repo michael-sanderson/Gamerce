@@ -49,10 +49,16 @@
                 <span asp-validation-for="GameSystemID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <label asp-for="PostingDate" class="control-label"></label>
+                <input asp-for="PostingDate" class="form-control" readonly/>
+                <span asp-validation-for="PostingDate" class="text-danger"></span>
+            
             </div>
-        </form>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-default" />
     </div>
+    </form>
+</div>
 </div>
 
 <div>

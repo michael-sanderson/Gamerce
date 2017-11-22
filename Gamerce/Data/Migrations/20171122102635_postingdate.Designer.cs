@@ -11,9 +11,10 @@ using System;
 namespace Gamerce.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171122102635_postingdate")]
+    partial class postingdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,6 +66,8 @@ namespace Gamerce.Data.Migrations
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<int>("UserID");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
@@ -139,14 +142,10 @@ namespace Gamerce.Data.Migrations
                     b.Property<string>("ProductDescription")
                         .IsRequired();
 
-                    b.Property<string>("ProductUserName");
-
                     b.Property<int>("SaleStatusID");
 
                     b.Property<string>("Title")
                         .IsRequired();
-
-                    b.Property<string>("UserID");
 
                     b.HasKey("ProductID");
 

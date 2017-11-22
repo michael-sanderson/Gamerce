@@ -10,6 +10,7 @@ namespace Gamerce.Models
     public class Product
     {
         public int ProductID { get; set; }
+        public string ProductUserName { get; set; }
         [Required]
         [DisplayName("Game title")]
         public string Title { get; set; }
@@ -31,11 +32,12 @@ namespace Gamerce.Models
         public int ConditionID { get; set; }
         [Required]
         [DisplayName("What system is the game for?")]
-        public int GameSystemID { get; set; }
+        public int GameSystemID { get; set; }    
         public Genre Genre { get; set; }
         public SaleStatus SaleStatus { get; set; }
         public Condition Condition { get; set; }
         public GameSystem GameSystem { get; set; }
-        public static DateTime PostingDate  { get; set; }
+        public DateTime PostingDate  { get; set; }
+        public string UserID { get; set; }
     }
 }

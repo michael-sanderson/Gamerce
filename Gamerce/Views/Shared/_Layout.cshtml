@@ -32,9 +32,31 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Home" asp-action="">System<span class="caret"></span></a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="">Genre<span class="caret"></span></a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="">Condition<span class="caret"></span></a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">All games</a></li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle">System<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-area="" asp-controller="Products" asp-action="">A</a></li>
+                                    <li><a asp-area="" asp-controller="Products" asp-action="">B</a></li>
+                                    <li><a asp-area="" asp-controller="Products" asp-action="">C</a></li>
+                                </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle">Genre<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="Products" asp-action="">A</a></li>
+                                <li><a asp-area="" asp-controller="Products" asp-action="">B</a></li>
+                                <li><a asp-area="" asp-controller="Products" asp-action="">C</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle">Condition<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="Products" asp-action="">A</a></li>
+                                <li><a asp-area="" asp-controller="Products" asp-action="">B</a></li>
+                                <li><a asp-area="" asp-controller="Products" asp-action="">C</a></li>
+                            </ul>
+                        </li>
                         <li><a asp-area="" asp-controller="Home" asp-action=""><span class="glyphicon glyphicon-search"></span></a></li>
                     </ul>
                     @await Html.PartialAsync("_LoginPartial")

@@ -7,22 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gamerce.Data;
 using Gamerce.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gamerce.Controllers
 {
+    
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus).Include(p => p.GameSystem);
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -47,7 +53,7 @@ namespace Gamerce.Controllers
 
             return View(product);
         }
-
+        [Authorize]
         // GET: Products/Create
         public IActionResult Create()
         {
@@ -63,10 +69,12 @@ namespace Gamerce.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,Title,ProductDescription,Price,GenreID,SaleStatusID,ConditionID,GameSystemID")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductID,Title,ProductDescription,Price,GenreID,SaleStatusID,ConditionID,GameSystemID,UserID,PostingDate,ProductUserName")] Product product)
         {
             if (ModelState.IsValid)
             {
+                product.ProductUserName = _userManager.GetUserName(User);
+                product.PostingDate = DateTime.Today.Date;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -78,7 +86,7 @@ namespace Gamerce.Controllers
 
             return View(product);
         }
-
+        [Authorize]
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -105,7 +113,7 @@ namespace Gamerce.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Title,ProductDescription,Price,GenreID,SaleStatusID,ConditionID,GameSystemID")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Title,ProductDescription,Price,GenreID,SaleStatusID,ConditionID,GameSystemID,UserID,PostingDate,ProductUserName")] Product product)
         {
             if (id != product.ProductID)
             {
@@ -116,6 +124,7 @@ namespace Gamerce.Controllers
             {
                 try
                 {
+                    product.ProductUserName = _userManager.GetUserName(User);
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -138,7 +147,7 @@ namespace Gamerce.Controllers
             ViewData["GameSystemID"] = new SelectList(_context.GameSystems, "GameSystemID", "ProductSystem", product.GameSystemID);
             return View(product);
         }
-
+        [Authorize]
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
