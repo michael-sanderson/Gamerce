@@ -32,7 +32,17 @@ namespace Gamerce.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Products/Details/5
+        [Authorize]
+        // GET: MyProducts
+        public async Task<IActionResult> MyProducts()
+        {
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem).Where(x => x.ProductUserName == _userManager.GetUserName(User));
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+
+        //GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -151,23 +161,30 @@ namespace Gamerce.Controllers
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var query = (from p in _context.Products where p.ProductID == id select p.ProductUserName);
 
-            var product = await _context.Products
-                .Include(p => p.Condition)
-                .Include(p => p.Genre)
-                .Include(p => p.SaleStatus)
-                .Include(p => p.GameSystem)
-                .SingleOrDefaultAsync(m => m.ProductID == id);
-            if (product == null)
+            if (query.First() == _userManager.GetUserName(User))
             {
-                return NotFound();
-            }
 
-            return View(product);
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var product = await _context.Products
+                    .Include(p => p.Condition)
+                    .Include(p => p.Genre)
+                    .Include(p => p.SaleStatus)
+                    .Include(p => p.GameSystem)
+                    .SingleOrDefaultAsync(m => m.ProductID == id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
+
+                return View(product);
+            }
+            else { return NotFound(); }
         }
 
         // POST: Products/Delete/5

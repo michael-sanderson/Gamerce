@@ -10,33 +10,36 @@ namespace Gamerce.Models
     public class Product
     {
         public int ProductID { get; set; }
+        [DisplayName("Seller")]
         public string ProductUserName { get; set; }
         [Required]
-        [DisplayName("Game title")]
+        [DisplayName("Title")]
         public string Title { get; set; }
         [Required]
         [DataType(DataType.MultilineText)]
-        [DisplayName("Give a brief description of the game")]
+        [DisplayName("Description")]
         public string ProductDescription { get; set; }
         [Required]
         [DataType(DataType.Currency)]
-        [DisplayName("Enter the price you are looking for")]
+        [DisplayName("Price")]
         public Decimal Price { get; set; }
         [Required]
-        [DisplayName("Game genre")]
         public int GenreID { get; set; }
         [Required]
         public int SaleStatusID { get; set; }
         [Required]
-        [DisplayName("What is the condition of the game?")]
         public int ConditionID { get; set; }
         [Required]
-        [DisplayName("What system is the game for?")]
-        public int GameSystemID { get; set; }    
+        public int GameSystemID { get; set; }
+        [DisplayName("Genre")]
         public Genre Genre { get; set; }
+        [DisplayName("Status")]
         public SaleStatus SaleStatus { get; set; }
+        [DisplayName("Condition")]
         public Condition Condition { get; set; }
+        [DisplayName("System")]
         public GameSystem GameSystem { get; set; }
+        [DisplayName("Date listed")]
         public DateTime PostingDate  { get; set; }
         public string UserID { get; set; }
     }
