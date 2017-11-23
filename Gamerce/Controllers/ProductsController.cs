@@ -32,10 +32,30 @@ namespace Gamerce.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        // GET: Products by search string
+        public async Task<IActionResult> ProductsBySearch(string searchString)
+        {
+
+            // ViewData["currentSearchKey"] = searchString;                  
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var products = (from c in _context.Products.Include(c => c.Genre).Include(c => c.GameSystem).Include(c => c.SaleStatus).Include(c => c.Condition)
+                                where (c.Title.Contains(searchString))
+                                select c).ToListAsync();
+
+                return View("Index", await products);
+            }
+
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem);
+            return View("Index", await applicationDbContext.ToListAsync());
+        }
+
         [Authorize]
         // GET: MyProducts
         public async Task<IActionResult> MyProducts()
         {
+            
             var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
                                        .Include(p => p.GameSystem).Where(x => x.ProductUserName == _userManager.GetUserName(User));
             return View(await applicationDbContext.ToListAsync());
@@ -100,22 +120,28 @@ namespace Gamerce.Controllers
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var checkUser = (from p in _context.Products where p.ProductID == id select p.ProductUserName);
 
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.ProductID == id);
-            if (product == null)
+            if (checkUser.First() == _userManager.GetUserName(User))
             {
-                return NotFound();
-            }
-            ViewData["ConditionID"] = new SelectList(_context.Conditions, "ConditionID", "ProductCondition", product.ConditionID);
-            ViewData["GenreID"] = new SelectList(_context.Set<Genre>(), "GenreID", "ProductGenre", product.GenreID);
-            ViewData["SaleStatusID"] = new SelectList(_context.SaleStatuses, "SaleStatusID", "ProductSaleStatus", product.SaleStatusID);
-            ViewData["GameSystemID"] = new SelectList(_context.GameSystems, "GameSystemID", "ProductSystem", product.GameSystemID);
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            return View(product);
+                var product = await _context.Products.SingleOrDefaultAsync(m => m.ProductID == id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
+                ViewData["ConditionID"] = new SelectList(_context.Conditions, "ConditionID", "ProductCondition", product.ConditionID);
+                ViewData["GenreID"] = new SelectList(_context.Set<Genre>(), "GenreID", "ProductGenre", product.GenreID);
+                ViewData["SaleStatusID"] = new SelectList(_context.SaleStatuses, "SaleStatusID", "ProductSaleStatus", product.SaleStatusID);
+                ViewData["GameSystemID"] = new SelectList(_context.GameSystems, "GameSystemID", "ProductSystem", product.GameSystemID);
+
+                return View(product);
+            }
+            else { return NotFound(); } 
         }
 
         // POST: Products/Edit/5
@@ -161,9 +187,9 @@ namespace Gamerce.Controllers
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            var query = (from p in _context.Products where p.ProductID == id select p.ProductUserName);
+            var checkUser = (from p in _context.Products where p.ProductID == id select p.ProductUserName);
 
-            if (query.First() == _userManager.GetUserName(User))
+            if (checkUser.First() == _userManager.GetUserName(User))
             {
 
                 if (id == null)
@@ -192,6 +218,7 @@ namespace Gamerce.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
             var product = await _context.Products.SingleOrDefaultAsync(m => m.ProductID == id);
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();

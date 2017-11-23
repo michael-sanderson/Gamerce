@@ -1,13 +1,13 @@
 ﻿@model Gamerce.Models.Product
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details - " + @Html.DisplayFor(model => model.Title);
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Title)</h2>
 
 <div>
-    <h4>Product</h4>
+    <h4>@Html.DisplayFor(model => model.Price)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -56,5 +56,6 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ProductID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to all games</a>
+    <a asp-action="MyProducts">Back to my games</a>
 </div>

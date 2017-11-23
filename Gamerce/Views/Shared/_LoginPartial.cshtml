@@ -5,13 +5,12 @@
 @inject UserManager<ApplicationUser> UserManager
 
 
-
     @if (SignInManager.IsSignedIn(User))
     {
-        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                <a asp-area="" asp-controller="" asp-action="" title=""><span class="glyphicon glyphicon-pushpin"></span>Sell a game</a>
+                <a asp-area="" asp-controller="Products" asp-action="Create" title=""><span class="glyphicon glyphicon-pushpin"></span>Sell a game</a>
                 </li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle">Hello @UserManager.GetUserName(User)<span class="caret"></span></a>
@@ -25,6 +24,7 @@
                 </li>
             </ul>
         </form>
+        
     }
     else
     {
