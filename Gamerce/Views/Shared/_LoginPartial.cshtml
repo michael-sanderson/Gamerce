@@ -15,13 +15,11 @@
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle">Hello @UserManager.GetUserName(User)<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a asp-area="" asp-controller="Account" asp-action="Manage" title="Manage">Manage Account</a></li>
+                            <li><a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Manage Account</a></li>
                             <li><a asp-area="" asp-controller="Products" asp-action="MyProducts" title="Manage">My Games</a></li>
                         </ul>
-                </li>                   
-                <li>
-                    <button type="submit" class="btn btn-link navbar-btn navbar-link">Sign out</button>
-                </li>
+                </li>                 
+                <li><button type="submit" class="navbar-btn btn btn-link"><span class="glyphicon glyphicon-off sign-out-button"></span></button></li>
             </ul>
         </form>
         
@@ -30,8 +28,8 @@
     {
 
         <ul class="nav navbar-nav navbar-right">
-
+            <li class="sell-game"><a asp-area="" asp-controller="Products" asp-action="Create" title=""><span class="glyphicon glyphicon-pushpin"></span>Sell a game</a></li>
             <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-            <li><a asp-area="" asp-controller="Account" asp-action="Login">Sign in</a></li>
+            <li><a asp-area="" asp-controller="Account" asp-action="Login"><span class="glyphicon glyphicon-off sign-in-button"></span></a></li>
         </ul>
     }

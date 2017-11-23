@@ -7,38 +7,23 @@
 <h2>@Html.DisplayFor(model => model.Title)</h2>
 
 <div>
-    <h4>@Html.DisplayFor(model => model.Price)</h4>
+    <h3>@Html.DisplayFor(model => model.Price)</h3>
+    <h4>@Html.DisplayFor(model => model.SaleStatus.ProductSaleStatus)</h4>
+    <h5>@Html.DisplayFor(model => model.Condition.ProductCondition)</h5>
+
+    <form asp-controller="" asp-action="">
+        <button class="btn btn-buy" type="submit" name="Buy">Buy game!</button>
+    </form>     
+
     <hr />
+      
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+        
         <dt>
             @Html.DisplayNameFor(model => model.GameSystem)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.GameSystem.ProductSystem)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductDescription)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ProductDescription)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Condition)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Condition.ProductCondition)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Genre)
@@ -47,15 +32,39 @@
             @Html.DisplayFor(model => model.Genre.ProductGenre)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.SaleStatus)
+            @Html.DisplayNameFor(model => model.Condition)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.SaleStatus.ProductSaleStatus)
+            @Html.DisplayFor(model => model.Condition.ProductCondition)
+        </dd>
+        
+    </dl>
+    
+</div>
+<div>
+    <h3>@Html.DisplayNameFor(model => model.ProductDescription)</h3>
+    <hr />
+    <p>@Html.DisplayFor(model => model.ProductDescription)</p>
+    <hr />
+    <dl class="dl-horizontal">
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.PostingDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PostingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductUserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductUserName)
         </dd>
     </dl>
 </div>
+    
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ProductID">Edit</a> |
-    <a asp-action="Index">Back to all games</a>
-    <a asp-action="MyProducts">Back to my games</a>
+    <a asp-action="Index">All games</a> |
+    <a asp-action="MyProducts">My games</a>
 </div>

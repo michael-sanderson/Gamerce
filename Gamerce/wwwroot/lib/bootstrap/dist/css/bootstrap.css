@@ -9,20 +9,19 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
-.input-symbol-gbp {
-    position: relative;
+
+.sell-game {
+    font-weight: bolder;
+    border-bottom: solid #8DA134 2px;
 }
 
-.input-symbol-gbp input {
-        padding-right: 18px;
-    }
+.sign-out-button {
+    color: red;
+}
 
-.input-symbol-gbp:before {
-        position: absolute;
-        top: 0;
-        content: "£";
-        left: 5px;
-    }
+.sign-in-button {
+    color: #8DA134;
+}
 body {
   margin: 0;
 }
@@ -1469,15 +1468,15 @@ dd {
 @media (min-width: 768px) {
   .dl-horizontal dt {
     float: left;
-    width: 160px;
+    width: 80px;
     overflow: hidden;
     clear: left;
-    text-align: right;
+    text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
   .dl-horizontal dd {
-    margin-left: 180px;
+    margin-left: 10px;
   }
 }
 abbr[title],
@@ -3077,6 +3076,16 @@ fieldset[disabled] a.btn {
   background-color: #fff;
   border-color: #ccc;
 }
+.btn-buy {
+    color: #333;
+    font-weight: bold;
+    background-color: #8DA134;
+    border: 2px solid #101010;
+    border-radius: 8px;
+}
+.btn-buy:hover {
+    color: #fff;
+    }
 .btn-default:focus,
 .btn-default.focus {
   color: #333;
