@@ -28,11 +28,13 @@ namespace Gamerce.Models.AccountViewModels
 
         [Required]  
         [Display(Name = "Post Code")]
+        [RegularExpression("^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$", ErrorMessage = "Post code format is not valid. Lower case will not be accepted.")]
         public string PostCode { get; set; }
 
         [Required]
         [Phone]
         [Display(Name = "Mobile phone no.")]
+        [RegularExpression(@"^(07\d{9}|447\d{9})$", ErrorMessage = "Phone number format is not valid.")]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Upload an optional profile photo")]
