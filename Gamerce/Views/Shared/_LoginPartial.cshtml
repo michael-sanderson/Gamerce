@@ -14,13 +14,12 @@
                 </li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle">Hello @UserManager.GetUserName(User)<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Manage Account</a></li>
-                            <li><a asp-area="" asp-controller="Products" asp-action="MyProducts" title="Manage">My Games</a></li>
-                        </ul>
-                </li>                 
+                    <ul class="dropdown-menu">
+                        <li><a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Manage Account</a></li>
+                        <li><a asp-area="" asp-controller="Products" asp-action="MyProducts" title="Manage">My Games</a></li>
+                    </ul>
                 <li><button type="submit" class="navbar-btn btn btn-link"><span class="glyphicon glyphicon-off sign-out-button"></span></button></li>
-            </ul>
+             </ul>
         </form>
         
     }
