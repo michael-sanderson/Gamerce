@@ -52,12 +52,30 @@ namespace Gamerce.Controllers
         }
 
         [Authorize]
-        // GET: MyProducts
+        // GET: My Products
         public async Task<IActionResult> MyProducts()
         {
             
             var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
                                        .Include(p => p.GameSystem).Where(x => x.ProductUserName == _userManager.GetUserName(User));
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: New Products
+        public async Task<IActionResult> NewProducts()
+        {
+
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem).Where(x => x.Condition.ProductCondition == "New");
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: Used Products
+        public async Task<IActionResult> UsedProducts()
+        {
+
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem).Where(x => x.Condition.ProductCondition == "Used");
             return View(await applicationDbContext.ToListAsync());
         }
 
