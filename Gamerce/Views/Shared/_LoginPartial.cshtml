@@ -17,8 +17,8 @@
                     <ul class="dropdown-menu">
                         <li><a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Manage Account</a></li>
                         <li><a asp-area="" asp-controller="Products" asp-action="MyProducts" title="Manage">My Games</a></li>
-                    </ul>
-                <li><button type="submit" class="navbar-btn btn btn-link"><span class="glyphicon glyphicon-off sign-out-button"></span></button></li>
+                        <li><button type="submit" class="navbar-btn btn btn-link">Sign out</button></li>
+                    </ul>               
              </ul>
         </form>
         
@@ -28,7 +28,11 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li class="sell-game"><a asp-area="" asp-controller="Products" asp-action="Create" title=""><span class="glyphicon glyphicon-pushpin"></span>Sell a game</a></li>
-            <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-            <li><a asp-area="" asp-controller="Account" asp-action="Login"><span class="glyphicon glyphicon-off sign-in-button"></span></a></li>
-        </ul>
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Login">Sign in</a></li>
+                </ul>
+         </ul>
     }

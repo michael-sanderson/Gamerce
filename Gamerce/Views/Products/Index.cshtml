@@ -11,6 +11,17 @@
 </p>
 
 <div class="table-responsive">
+    <div class="pull-right">
+        <form asp-controller="Products" asp-action="" method="get">
+            <select name="sortBy">
+                <option value="recent" selected>Most recent</option>
+                <option value="oldest">Oldest</option>
+                <option value="lowest">Price: Low to high</option>
+                <option value="highest">Price: High to low</option>
+            </select>
+            <button type="submit" class="btn btn-buy">Go</button>
+        </form>
+    </div>
 <table class="table table-striped table-hover">
     <thead>
         <tr>
