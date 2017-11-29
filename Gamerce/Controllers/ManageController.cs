@@ -59,6 +59,9 @@ namespace Gamerce.Controllers
                 Username = user.UserName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PostCode = user.PostCode,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
             };
@@ -100,6 +103,21 @@ namespace Gamerce.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
                 }
             }
+
+            //if (model.FirstName != user.FirstName)
+            //{
+            //    user.FirstName.Equals(model.FirstName);
+            //}
+
+            //if (model.LastName != user.LastName)
+            //{
+            //    user.LastName = model.LastName;
+            //}
+
+            //if (model.PostCode != user.PostCode)
+            //{
+            //    user.PostCode = model.PostCode;               
+            //}
 
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));

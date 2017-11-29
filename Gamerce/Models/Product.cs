@@ -40,6 +40,7 @@ namespace Gamerce.Models
         [DisplayName("System")]
         public GameSystem GameSystem { get; set; }
         [DisplayName("Date listed")]
+        [DataType(DataType.Date)]
         public DateTime PostingDate  { get; set; }
         public string UserID { get; set; }
     }

@@ -10,7 +10,7 @@ namespace Gamerce.Models.AccountViewModels
     {
 
         [Required]
-        [Display(Name = "User Name")]
+        [Display(Name = "User name")]
         public string UserName { get; set; }
 
         [Required]

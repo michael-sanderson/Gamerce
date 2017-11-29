@@ -17,7 +17,7 @@ html {
 
 .sign-out-button {
     color: #B22222;
-}
+  }
 
 .sign-in-button {
     color: #8DA134;
@@ -141,8 +141,8 @@ button,
 html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-  -webkit-appearance: button;
-  cursor: pointer;
+    -webkit-appearance: button;
+    cursor: pointer;
 }
 button[disabled],
 html input[disabled] {
@@ -4706,14 +4706,14 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #fff;
 }
 .navbar-inverse .btn-link {
-  color: #a94442;
+  color: #000;
   font-weight: bold;
 }
 
 
 .navbar-inverse .btn-link:hover,
 .navbar-inverse .btn-link:focus {
-  color: #3c763d;
+  color: #000;
 }
 
 .navbar-inverse .btn-link[disabled]:hover,

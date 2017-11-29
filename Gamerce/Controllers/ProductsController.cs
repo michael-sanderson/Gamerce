@@ -39,8 +39,13 @@ namespace Gamerce.Controllers
             // ViewData["currentSearchKey"] = searchString;                  
             if (!string.IsNullOrEmpty(searchString))
             {
-                var products = (from c in _context.Products.Include(c => c.Genre).Include(c => c.GameSystem).Include(c => c.SaleStatus).Include(c => c.Condition)
-                                where (c.Title.Contains(searchString))
+                               var products = (from c in _context.Products.Include(c => c.Genre).Include(c => c.GameSystem)
+                                .Include(c => c.SaleStatus).Include(c => c.Condition)
+                                join u in _userManager.Users on c.ProductUserName equals u.UserName
+                                where (u.PostCode.Equals(searchString) ||
+                                c.Title.Contains(searchString) || 
+                                c.Genre.ProductGenre.Contains(searchString) ||
+                                c.ProductDescription.Contains(searchString))                         
                                 select c).ToListAsync();
 
                 return View("Index", await products);
@@ -70,12 +75,93 @@ namespace Gamerce.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        // GET: PS4 Products
+        public async Task<IActionResult> PS4Products()
+        {
+
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem).Where(x => x.GameSystem.ProductSystem == "PS4");
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: PC Products
+        public async Task<IActionResult> PCProducts()
+        {
+
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem).Where(x => x.GameSystem.ProductSystem == "PC");
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: PS Vita Products
+        public async Task<IActionResult> PSVitaProducts()
+        {
+
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem).Where(x => x.GameSystem.ProductSystem == "PS Vita");
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: PS3 Products
+        public async Task<IActionResult> PS3Products()
+        {
+
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem).Where(x => x.GameSystem.ProductSystem == "PS3");
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: XBOX One Products
+        public async Task<IActionResult> XboxOneProducts()
+        {
+
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem).Where(x => x.GameSystem.ProductSystem == "XBOX One");
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: XBOX 360 Products
+        public async Task<IActionResult> Xbox360Products()
+        {
+
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem).Where(x => x.GameSystem.ProductSystem == "XBOX 360");
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         // GET: Used Products
         public async Task<IActionResult> UsedProducts()
         {
 
             var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
                                        .Include(p => p.GameSystem).Where(x => x.Condition.ProductCondition == "Used");
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: Nintendo Switch Products 
+        public async Task<IActionResult> NintendoSwitchProducts()
+        {
+
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem).Where(x => x.GameSystem.ProductSystem == "Nintendo Switch");
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: Nintendo 3DS Products 
+        public async Task<IActionResult> Nintendo3DSProducts()
+        {
+
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem).Where(x => x.GameSystem.ProductSystem == "Nintendo 3DS");
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: Nintendo Wii U Products 
+        public async Task<IActionResult> NintendoWiiUProducts()
+        {
+
+            var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
+                                       .Include(p => p.GameSystem).Where(x => x.GameSystem.ProductSystem == "Nintendo Wii U");
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -121,11 +207,12 @@ namespace Gamerce.Controllers
         {
             if (ModelState.IsValid)
             {
+                product.UserID = _userManager.GetUserId(User);
                 product.ProductUserName = _userManager.GetUserName(User);
                 product.PostingDate = DateTime.Today.Date;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(MyProducts));
             }
             ViewData["ConditionID"] = new SelectList(_context.Conditions, "ConditionID", "ProductCondition", product.ConditionID);
             ViewData["GenreID"] = new SelectList(_context.Set<Genre>(), "GenreID", "ProductGenre", product.GenreID);
