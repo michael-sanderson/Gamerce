@@ -104,21 +104,36 @@ namespace Gamerce.Controllers
                 }
             }
 
-            //if (model.FirstName != user.FirstName)
-            //{
-            //    user.FirstName.Equals(model.FirstName);
-            //}
+            if (model.PostCode != user.PostCode)
+            {
+                user.PostCode = model.PostCode;
+                var setPostCodeResult = await _userManager.UpdateAsync(user);
+                if (!setPostCodeResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                }
+            }
 
-            //if (model.LastName != user.LastName)
-            //{
-            //    user.LastName = model.LastName;
-            //}
+            if (model.FirstName != user.FirstName)
+            {
+                user.FirstName = model.FirstName;
+                var setFirstNameResult = await _userManager.UpdateAsync(user);
+                if (!setFirstNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting first name for user with ID '{user.Id}'.");
+                }
+            }
 
-            //if (model.PostCode != user.PostCode)
-            //{
-            //    user.PostCode = model.PostCode;               
-            //}
-
+            if (model.LastName != user.LastName)
+            {
+                user.LastName = model.LastName;
+                var setLastNameResult = await _userManager.UpdateAsync(user);
+                if (!setLastNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting last name for user with ID '{user.Id}'.");
+                }
+            }
+           
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
         }
