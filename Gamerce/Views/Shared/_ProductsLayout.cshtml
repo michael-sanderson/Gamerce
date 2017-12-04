@@ -1,14 +1,17 @@
 ﻿@model IEnumerable<Gamerce.Models.Product>
 
+
+<div class="panel-body">
+    
 <p>
-    <a asp-action="Create">Sell a game</a>
+    <a asp-action="Create" class="btn btn-primary">Sell a game</a>
 </p>
 
 <div class="table-responsive">
     <div class="pull-right">
         <form asp-controller="Products" asp-action="" method="get">
             <label>Sort by:</label>
-            <select name="sortBy">
+                <select name="sortType">
                 <option value="recent" selected>Most recent</option>
                 <option value="oldest">Oldest</option>
                 <option value="lowest">Price: Low to high</option>
@@ -91,3 +94,5 @@
         </tbody>
     </table>
 </div>
+    </div>
+

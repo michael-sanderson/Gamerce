@@ -4,6 +4,10 @@
     ViewData["Title"] = "Nintendo 3DS games";
 }
 
-<h2>Nintendo 3DS games</h2>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">Nintendo 3DS games</div>
 
-@await Html.PartialAsync("_ProductsLayout")
+    @await Html.PartialAsync("_ProductsLayout")
+
+    <div class="panel-footer"></div>
+</div>

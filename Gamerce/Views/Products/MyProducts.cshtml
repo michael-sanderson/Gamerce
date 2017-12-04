@@ -4,10 +4,12 @@
     ViewData["Title"] = "My games";
 }
 
-<h2>My games</h2>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">My games</div>
+    <div class="panel-body">
 
 <p>
-    <a asp-action="Create">Sell another game</a>
+    <a asp-action="Create" class="btn btn-primary">Sell another game</a>
 </p>
 
 <div class="table-responsive">
@@ -48,10 +50,7 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.PostingDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProductUserName)
-                </th>
+                </th>                
                 <th></th>
             </tr>
         </thead>
@@ -84,10 +83,7 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PostingDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductUserName)
-                    </td>
+                    </td>                    
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.ProductID">Details</a> |
@@ -97,6 +93,9 @@
             }
         </tbody>
     </table>
+    </div>
+    <div class="panel-footer"></div>
 </div>
+        </div>
 
 

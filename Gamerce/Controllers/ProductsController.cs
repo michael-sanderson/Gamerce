@@ -25,30 +25,44 @@ namespace Gamerce.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
+            //ViewBag.DateSortParam = sortOrder == "date" ? "date_desc" : "date";
+
+            //ViewBag.CurrentSort = sortOrder;
+
             var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
                                        .Include(p => p.GameSystem);
-            return View(await applicationDbContext.ToListAsync());
+
+            //switch (sortOrder)
+            //{
+            //    case "date":
+            //        applicationDbContext = applicationDbContext.OrderBy(x => x.PostingDate);
+            //        break;
+
+                    return View(await applicationDbContext.ToListAsync());
+
+            //}
         }
 
         // GET: Products by search string
-        public async Task<IActionResult> ProductsBySearch(string searchString)
+        public async Task<IActionResult> ProductsBySearch(string searchString, string sortOrder)
         {
 
             // ViewData["currentSearchKey"] = searchString;                  
             if (!string.IsNullOrEmpty(searchString))
             {
-                               var products = (from c in _context.Products.Include(c => c.Genre).Include(c => c.GameSystem)
-                                .Include(c => c.SaleStatus).Include(c => c.Condition)
-                                join u in _userManager.Users on c.ProductUserName equals u.UserName
-                                where (u.PostCode.Equals(searchString) ||
-                                c.Title.Contains(searchString) || 
-                                c.Genre.ProductGenre.Contains(searchString) ||
-                                c.ProductDescription.Contains(searchString))                         
-                                select c).ToListAsync();
+                var products = (from c in _context.Products.Include(c => c.Genre).Include(c => c.GameSystem)
+                .Include(c => c.SaleStatus).Include(c => c.Condition)
+                join u in _userManager.Users on c.ProductUserName equals u.UserName
+                where (u.PostCode.Equals(searchString) ||
+                c.Title.Contains(searchString) || 
+                c.Genre.ProductGenre.Contains(searchString) ||
+                c.ProductDescription.Contains(searchString))                         
+                select c).ToListAsync();             
 
                 return View("Index", await products);
+                
             }
 
             var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
