@@ -10,10 +10,11 @@ namespace Gamerce.Models.AccountViewModels
     {
 
         [Required]
-        [Display(Name = "User Name")]
+        [Display(Name = "User name", Prompt = "Enter your user name")]
         public string UserName { get; set; }
         
         [Required]
+        [Display(Name = "Password", Prompt = "Enter your password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

@@ -10,6 +10,7 @@ namespace Gamerce.Models.AccountViewModels
     {
         [Required]
         [EmailAddress]
+        [Display(Name = "Email", Prompt = "Enter your email address")]
         public string Email { get; set; }
     }
 }

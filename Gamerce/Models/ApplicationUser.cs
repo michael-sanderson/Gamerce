@@ -15,7 +15,7 @@ namespace Gamerce.Models
         [DisplayName("First Name")]
         public string FirstName { get; set; }
         [Required]
-        [DisplayName("Last Name")]
+        [DisplayName("Last Name")]        
         public string LastName { get; set; }
         [Required]
         [DisplayName("Post Code")]
