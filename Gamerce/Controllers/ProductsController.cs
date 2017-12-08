@@ -294,7 +294,7 @@ namespace Gamerce.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(MyProducts));
             }
             ViewData["ConditionID"] = new SelectList(_context.Conditions, "ConditionID", "ProductCondition", product.ConditionID);
             ViewData["GenreID"] = new SelectList(_context.Set<Genre>(), "GenreID", "ProductGenre", product.GenreID);
