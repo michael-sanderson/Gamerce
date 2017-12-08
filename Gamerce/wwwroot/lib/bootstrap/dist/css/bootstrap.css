@@ -4025,7 +4025,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eee;
+  background-color: #8EA135;
+  color: white;
 }
 .nav > li.disabled > a {
   color: #777;
@@ -4134,7 +4135,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #fff;
-  background-color: #337ab7;
+  background-color: #42526C;
 }
 .nav-stacked > li {
   float: none;
@@ -5529,6 +5530,7 @@ button.list-group-item-danger.active:focus {
   color: inherit;
 }
 .panel-footer {
+    color:white
     padding: 10px 15px;
     background-color: #42526C;
     border-bottom-right-radius: 8px;
