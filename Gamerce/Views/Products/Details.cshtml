@@ -4,12 +4,15 @@
     ViewData["Title"] = "Game Details";
 }
 
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">Game details</div>
+    <div class="panel-body">
+
 <h2>@Html.DisplayFor(model => model.Title)</h2>
 
 <div>
     <h3>@Html.DisplayFor(model => model.Price)</h3>
     <h4>@Html.DisplayFor(model => model.SaleStatus.ProductSaleStatus)</h4>
-    <h5>@Html.DisplayFor(model => model.Condition.ProductCondition)</h5>
 
     <form asp-controller="" asp-action="" method="post">
         <button class="btn btn-buy" type="submit" name="Buy">Buy game!</button>
@@ -68,3 +71,5 @@
     <a asp-action="Index">All games</a> |
     <a asp-action="MyProducts">My games</a>
 </div>
+        <div class="panel-footer"></div>
+        </div></div>
