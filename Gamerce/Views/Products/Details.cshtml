@@ -1,5 +1,7 @@
 ﻿@model Gamerce.Models.Product
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Game Details";
 }
@@ -14,35 +16,44 @@
     <h3>@Html.DisplayFor(model => model.Price)</h3>
     <h4>@Html.DisplayFor(model => model.SaleStatus.ProductSaleStatus)</h4>
 
-    <form asp-controller="" asp-action="" method="post">
-        <button class="btn btn-buy" type="submit" name="Buy">Buy game!</button>
-    </form>     
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (!UserManager.GetUserName(User).Equals(Model.ProductUserName))
+    {
+           @if (!Model.SaleStatus.ProductSaleStatus.Equals("Sold"))
+           {
+                <form asp-action="Buy" asp-route-id="@Model.ProductID" method="post">
+                <button class="btn btn-buy" type="submit" name="Buy">Buy game!</button>
+                </form>
+           }
+     }    
+}
 
-    <hr />
-      
-    <dl class="dl-horizontal">
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.GameSystem)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.GameSystem.ProductSystem)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Genre.ProductGenre)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Condition)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Condition.ProductCondition)
-        </dd>
-        
-    </dl>
-    
+        <hr />
+
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GameSystem)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.GameSystem.ProductSystem)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Genre)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Genre.ProductGenre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Condition)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Condition.ProductCondition)
+            </dd>
+
+        </dl>
+
 </div>
 <div>
     <h3>@Html.DisplayNameFor(model => model.ProductDescription)</h3>

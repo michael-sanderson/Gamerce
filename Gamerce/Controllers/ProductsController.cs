@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Gamerce.Controllers
 {
-    
+
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -40,7 +40,7 @@ namespace Gamerce.Controllers
             //        applicationDbContext = applicationDbContext.OrderBy(x => x.PostingDate);
             //        break;
 
-                    return View(await applicationDbContext.ToListAsync());
+            return View(await applicationDbContext.ToListAsync());
 
             //}
         }
@@ -54,15 +54,15 @@ namespace Gamerce.Controllers
             {
                 var products = (from c in _context.Products.Include(c => c.Genre).Include(c => c.GameSystem)
                 .Include(c => c.SaleStatus).Include(c => c.Condition)
-                join u in _userManager.Users on c.ProductUserName equals u.UserName
-                where (u.PostCode.Equals(searchString) ||
-                c.Title.Contains(searchString) || 
-                c.Genre.ProductGenre.Contains(searchString) ||
-                c.ProductDescription.Contains(searchString))                         
-                select c).ToListAsync();             
+                                join u in _userManager.Users on c.ProductUserName equals u.UserName
+                                where (u.PostCode.Equals(searchString) ||
+                                c.Title.Contains(searchString) ||
+                                c.Genre.ProductGenre.Contains(searchString) ||
+                                c.ProductDescription.Contains(searchString))
+                                select c).ToListAsync();
 
                 return View("Index", await products);
-                
+
             }
 
             var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
@@ -74,7 +74,7 @@ namespace Gamerce.Controllers
         // GET: My Products
         public async Task<IActionResult> MyProducts()
         {
-            
+
             var applicationDbContext = _context.Products.Include(p => p.Condition).Include(p => p.Genre).Include(p => p.SaleStatus)
                                        .Include(p => p.GameSystem).Where(x => x.ProductUserName == _userManager.GetUserName(User));
             return View(await applicationDbContext.ToListAsync());
@@ -260,7 +260,7 @@ namespace Gamerce.Controllers
 
                 return View(product);
             }
-            else { return NotFound(); } 
+            else { return NotFound(); }
         }
 
         // POST: Products/Edit/5
@@ -302,6 +302,42 @@ namespace Gamerce.Controllers
             ViewData["GameSystemID"] = new SelectList(_context.GameSystems, "GameSystemID", "ProductSystem", product.GameSystemID);
             return View(product);
         }
+
+        [Authorize]
+        // POST: Products/Buy/
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Buy(int id)
+        {
+           // Product product = (from p in _context.Products where p.ProductID == id select p).First();
+           Product product = await _context.Products
+                .Include(p => p.SaleStatus)
+                .SingleOrDefaultAsync(m => m.ProductID == id);
+
+            SaleStatus Sold = await _context.SaleStatuses.SingleOrDefaultAsync(p => p.ProductSaleStatus == "Sold");        
+
+            try
+            {
+                product.SaleStatus = Sold;
+                _context.Update(product);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProductExists(product.ProductID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Details), new { id = id });
+        }
+
         [Authorize]
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)

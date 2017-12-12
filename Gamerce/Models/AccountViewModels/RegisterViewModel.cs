@@ -32,7 +32,7 @@ namespace Gamerce.Models.AccountViewModels
         [Required]  
         [Display(Name = "Post Code", Prompt = "Enter your post code")]
         [StringLength(10, MinimumLength = 4, ErrorMessage = "Must be betweeen 4 and 10 characters")]
-        [RegularExpression("^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$", ErrorMessage = "Post code format is not valid. Lower case will not be accepted.")]
+        [RegularExpression("^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$", ErrorMessage = "Upper case only and include a space.")]
         public string PostCode { get; set; }
 
         [Required]

@@ -18,22 +18,22 @@
                         <input type="hidden" asp-for="ProductID" />
                         <div class="form-group">
                             <label asp-for="Title" class="control-label"></label>
-                            <input asp-for="Title" class="form-control" readonly />
+                            <input asp-for="Title" class="form-control"/>
                             <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Genre" class="control-label"></label>
-                            <select asp-for="GenreID" class="form-control" asp-items="ViewBag.GenreID" readonly></select>
+                            <select asp-for="GenreID" class="form-control" asp-items="ViewBag.GenreID"></select>
                             <span asp-validation-for="GenreID" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="GameSystem" class="control-label"></label>
-                            <select asp-for="GameSystemID" class="form-control" asp-items="ViewBag.GameSystemID" readonly></select>
+                            <select asp-for="GameSystemID" class="form-control" asp-items="ViewBag.GameSystemID"></select>
                             <span asp-validation-for="GameSystemID" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Condition" class="control-label"></label>
-                            <select asp-for="ConditionID" class="form-control" asp-items="ViewBag.ConditionID" readonly></select>
+                            <select asp-for="ConditionID" class="form-control" asp-items="ViewBag.ConditionID"></select>
                             <span asp-validation-for="ConditionID" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -48,12 +48,12 @@
                             <textarea rows=5 asp-for="ProductDescription" class="form-control"></textarea>
                             <span asp-validation-for="ProductDescription" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" hidden>
                             <label asp-for="SaleStatus" class="control-label"></label>
                             <select asp-for="SaleStatusID" class="form-control" asp-items="ViewBag.SaleStatusID"></select>
                             <span asp-validation-for="SaleStatusID" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" hidden>
                             <label asp-for="PostingDate" class="control-label"></label>
                             <input asp-for="PostingDate" class="form-control" readonly/>
                             <span asp-validation-for="PostingDate" class="text-danger"></span>
