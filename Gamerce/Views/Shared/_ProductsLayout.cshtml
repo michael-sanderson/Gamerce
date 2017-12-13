@@ -1,47 +1,35 @@
 ﻿@model IEnumerable<Gamerce.Models.Product>
 
-
 <div class="panel-body">
     
 <div class="table-responsive">
-    <div class="pull-right">
-        <form asp-controller="Products" asp-action="" method="get">
-            <label>Sort by:</label>
-                <select name="sortType">
-                <option value="recent" selected>Most recent</option>
-                <option value="oldest">Oldest</option>
-                <option value="lowest">Price: Low to high</option>
-                <option value="highest">Price: High to low</option>
-            </select>
-            <button type="submit" class="btn btn-buy">Go</button>
-        </form>
-    </div>
-    <table class="table table-striped table-hover">
+    
+    <table id="productsTable" class="table table-striped table-hover">
         <thead>
            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
+                <th style="cursor:pointer" onclick="sortTable(0)" class="productTitle">
+                    @Html.DisplayNameFor(model => model.Title) 
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.GameSystem)
+                <th style="cursor:pointer" onclick="sortTable(1)" class="productSystem">
+                    @Html.DisplayNameFor(model => model.GameSystem) 
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.ProductDescription)
                 </th>
-                <th>
+                <th class="ProductPrice">
                     @Html.DisplayNameFor(model => model.Price)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Condition)
+                <th style="cursor:pointer" onclick="sortTable(4)" class="ProductCondition">
+                    @Html.DisplayNameFor(model => model.Condition) 
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Genre)
+                <th style="cursor:pointer" onclick="sortTable(5)" class="ProductGenre">
+                    @Html.DisplayNameFor(model => model.Genre) 
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SaleStatus)
+                <th style="cursor:pointer" onclick="sortTable(6)" class="ProductSaleStatus">
+                    @Html.DisplayNameFor(model => model.SaleStatus) 
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PostingDate)
+                <th class="ProductPostingDate">
+                    @Html.DisplayNameFor(model => model.PostingDate) 
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.ProductUserName)
