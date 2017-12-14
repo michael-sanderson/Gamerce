@@ -20,17 +20,17 @@ namespace Gamerce.Models.AccountViewModels
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "First Name", Prompt = "Enter your first name")]
+        [Display(Name = "First name", Prompt = "Enter your first name")]
         [StringLength(30, MinimumLength = 1, ErrorMessage = "Must be betweeen 1 and 30 characters")]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last Name", Prompt = "Enter your last name")]
+        [Display(Name = "Last name", Prompt = "Enter your last name")]
         [StringLength(30, MinimumLength = 1, ErrorMessage = "Must be betweeen 1 and 30 characters")]
         public string LastName { get; set; }
 
         [Required]  
-        [Display(Name = "Post Code", Prompt = "Enter your post code")]
+        [Display(Name = "Post code", Prompt = "Enter your post code")]
         [StringLength(10, MinimumLength = 4, ErrorMessage = "Must be betweeen 4 and 10 characters")]
         [RegularExpression("^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$", ErrorMessage = "Upper case only and include a space.")]
         public string PostCode { get; set; }

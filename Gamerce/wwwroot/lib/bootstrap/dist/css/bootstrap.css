@@ -15,6 +15,11 @@ html {
     border-bottom: solid #8DA134 2px;
 }
 
+.table-header-sort:hover {
+
+color: #8EA135;
+}
+
 .sign-out-button {
     color: #B22222;
   }

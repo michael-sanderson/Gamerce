@@ -7,28 +7,28 @@
     <table id="productsTable" class="table table-striped table-hover">
         <thead>
            <tr>
-                <th style="cursor:pointer" onclick="sortTable(0)" class="productTitle">
-                    @Html.DisplayNameFor(model => model.Title) 
+                <th class ="table-header-sort" style="cursor:pointer" onclick="sortTable(0)">
+                    @Html.DisplayNameFor(model => model.Title)&#9660 
                 </th>
-                <th style="cursor:pointer" onclick="sortTable(1)" class="productSystem">
-                    @Html.DisplayNameFor(model => model.GameSystem) 
+                <th class ="table-header-sort" style="cursor:pointer" onclick="sortTable(1)">
+                    @Html.DisplayNameFor(model => model.GameSystem)&#9660  
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.ProductDescription)
                 </th>
-                <th class="ProductPrice">
+                <th>
                     @Html.DisplayNameFor(model => model.Price)
                 </th>
-                <th style="cursor:pointer" onclick="sortTable(4)" class="ProductCondition">
-                    @Html.DisplayNameFor(model => model.Condition) 
+                <th class ="table-header-sort" style="cursor:pointer" onclick="sortTable(4)">
+                    @Html.DisplayNameFor(model => model.Condition)&#9660 
                 </th>
-                <th style="cursor:pointer" onclick="sortTable(5)" class="ProductGenre">
-                    @Html.DisplayNameFor(model => model.Genre) 
+                <th class ="table-header-sort" style="cursor:pointer" onclick="sortTable(5)">
+                    @Html.DisplayNameFor(model => model.Genre)&#9660 
                 </th>
-                <th style="cursor:pointer" onclick="sortTable(6)" class="ProductSaleStatus">
-                    @Html.DisplayNameFor(model => model.SaleStatus) 
+                <th class ="table-header-sort" style="cursor:pointer" onclick="sortTable(6)">
+                    @Html.DisplayNameFor(model => model.SaleStatus)&#9660  
                 </th>
-                <th class="ProductPostingDate">
+                <th>
                     @Html.DisplayNameFor(model => model.PostingDate) 
                 </th>
                 <th>
@@ -44,7 +44,7 @@
 
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Title)
+                        <a asp-action="Details" asp-route-id="@item.ProductID"> @Html.DisplayFor(modelItem => item.Title)</a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.GameSystem.ProductSystem)
@@ -70,9 +70,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ProductUserName)
                     </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.ProductID">Details</a>
-                    </td>
+                    
                 </tr>
             }
         </tbody>

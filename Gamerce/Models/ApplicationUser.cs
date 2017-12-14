@@ -12,13 +12,13 @@ namespace Gamerce.Models
     public class ApplicationUser : IdentityUser
     {
         [Required]
-        [DisplayName("First Name")]
+        [DisplayName("First name")]
         public string FirstName { get; set; }
         [Required]
-        [DisplayName("Last Name")]        
+        [DisplayName("Last name")]        
         public string LastName { get; set; }
         [Required]
-        [DisplayName("Post Code")]
+        [DisplayName("Post code")]
         public string PostCode { get; set; }
         [DisplayName("Upload an optional profile photo")]
         public byte[] Photo { get; set; }

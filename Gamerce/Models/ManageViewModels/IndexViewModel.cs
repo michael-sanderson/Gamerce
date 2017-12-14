@@ -18,17 +18,17 @@ namespace Gamerce.Models.ManageViewModels
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "First name")]
         [StringLength(30, MinimumLength = 1, ErrorMessage = "Must be betweeen 1 and 30 characters")]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last Name")]
+        [Display(Name = "Last name")]
         [StringLength(30, MinimumLength = 1, ErrorMessage = "Must be betweeen 1 and 30 characters")]
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "Post Code")]
+        [Display(Name = "Post code")]
         [StringLength(10, MinimumLength = 4, ErrorMessage = "Must be betweeen 4 and 10 characters")]
         [RegularExpression("^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$", ErrorMessage = "Post code format is not valid. Lower case will not be accepted.")]
         public string PostCode { get; set; }

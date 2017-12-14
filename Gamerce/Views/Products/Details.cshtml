@@ -26,7 +26,12 @@
                 <button class="btn btn-buy" type="submit" name="Buy">Buy game!</button>
                 </form>
            }
-     }    
+    }
+    else
+    {   <div class="alert alert-info">
+        <strong>Info!</strong> This is your game. <a asp-action="Edit" asp-route-id="@Model.ProductID">Edit</a> 
+        </div>
+    }
 }
 
         <hr />
